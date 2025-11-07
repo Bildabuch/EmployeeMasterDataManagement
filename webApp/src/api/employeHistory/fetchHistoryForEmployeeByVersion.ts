@@ -2,6 +2,8 @@ import {baseUrl} from "../baseUrl.ts";
 import {type EmployeeHistoryEntry} from "../../models";
 import {ResponseObject} from "../ResponseObject.ts";
 import {createResponseObject} from "../createResponseObject.ts";
+import {create500ResponseObject} from "../create500ResponseObject.ts";
+import {mapEmployeeHistoryDto} from "./mapEmployeeHistoryDto.ts";
 
 /**
  * Fetches the version history for a specific employee.
@@ -17,6 +19,11 @@ import {createResponseObject} from "../createResponseObject.ts";
  * - On failure: Contains an error flag and status code.
  */
 export const fetchHistoryForEmployeeByVersion = async (employeeId: string, version: string): Promise<ResponseObject<EmployeeHistoryEntry>> => {
-    const response = await fetch(`${baseUrl}/employee-versions/${encodeURIComponent(employeeId)}/${encodeURIComponent(version)}`);
-    return createResponseObject(response);
+    try {
+        const response = await fetch(`${baseUrl}/employee-versions/${encodeURIComponent(employeeId)}/${encodeURIComponent(version)}`);
+        return createResponseObject(response, mapEmployeeHistoryDto);
+    } catch (error) {
+        console.error("Error fetching employees:", error);
+        return create500ResponseObject()
+    }
 }

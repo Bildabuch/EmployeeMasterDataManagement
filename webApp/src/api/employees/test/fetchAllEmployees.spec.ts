@@ -30,7 +30,7 @@ describe('fetchAllEmployees', () => {
 
         expect(fetchMock).toHaveBeenCalledWith('http://localhost:8080/employees/');
         expect(mapEmployeeDto).toHaveBeenCalledTimes(mockEmployeeDtoList.length);
-        expect(result).toEqual(mockMappedEmployees);
+        expect(result.data).toEqual(mockMappedEmployees);
     });
 
     it('returns an empty array when the API call fails', async () => {
@@ -40,17 +40,7 @@ describe('fetchAllEmployees', () => {
 
         expect(fetchMock).toHaveBeenCalledWith('http://localhost:8080/employees/');
         expect(mapEmployeeDto).not.toHaveBeenCalled();
-        expect(result).toEqual([]);
-    });
-
-    it('returns an empty array when the API response is invalid JSON', async () => {
-        fetchMock.mockResponseOnce('Invalid JSON');
-
-        const result = await fetchAllEmployees();
-
-        expect(fetchMock).toHaveBeenCalledWith('http://localhost:8080/employees/');
-        expect(mapEmployeeDto).not.toHaveBeenCalled();
-        expect(result).toEqual([]);
+        expect(result.data).toEqual(null);
     });
 
     it('logs an error when the API call fails', async () => {

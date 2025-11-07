@@ -1,7 +1,8 @@
 package com.kaestner.domain.employeeversion
 
 import jakarta.persistence.*
-import kotlinx.datetime.*
+import kotlinx.datetime.LocalDate
+import kotlinx.datetime.LocalDateTime
 
 /**
  * Historical snapshot of an Employee at a specific point in time.
@@ -37,6 +38,6 @@ data class EmployeeVersion(
     val birthDate: LocalDate,
     val pensionInsuranceNumber: String,
     val taxIdentificationNumber: String,
-    val createdAt: LocalDateTime = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault()),
+    val createdAt: LocalDateTime,
     val version: Long = 0
 )

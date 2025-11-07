@@ -3,6 +3,7 @@ package com.kaestner.domain.employee
 import jakarta.persistence.*
 import kotlinx.datetime.*
 import org.example.employeemgmt.IEmployee
+import org.springframework.data.annotation.LastModifiedDate
 
 /**
  * JPA entity representing an employee in the system.
@@ -38,8 +39,9 @@ data class Employee(
 
     @Version
     val version: Long? = 0,
-
-    override var updatedAt: LocalDateTime = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault())
+    @LastModifiedDate
+    @Column(nullable = false)
+    override var updatedAt: LocalDateTime?
 ) : IEmployee {
 
     /**
@@ -52,6 +54,12 @@ data class Employee(
      */
     @PreUpdate
     fun touchUpdatedAt() {
-        this.updatedAt = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault())
+        updatedAt = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault())
     }
+
+    @PrePersist
+    fun onCreate() {
+        updatedAt = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault())
+    }
+
 }

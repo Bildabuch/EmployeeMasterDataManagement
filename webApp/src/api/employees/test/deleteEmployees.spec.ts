@@ -10,22 +10,8 @@ describe('deleteEmployees', () => {
     beforeEach(() => {
         fetchMock.resetMocks();
     });
-
-    it('returns true when employees are successfully deleted', async () => {
-        fetchMock.mockResponseOnce('', {status: 200});
-
-        const result = await deleteEmployees(mockEmployeeIds);
-
-        expect(fetchMock).toHaveBeenCalledWith(mockUrl, {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(mockEmployeeIds),
-        });
-        expect(result).toBe(true);
-    });
-
-    it('returns false when the API responds with a 404 status', async () => {
-        fetchMock.mockResponseOnce('', {status: 404});
+    it('returns a structured response object when employees are successfully deleted', async () => {
+        fetchMock.mockResponseOnce(JSON.stringify({ success: true }), {status: 200});
 
         const result = await deleteEmployees(mockEmployeeIds);
 
@@ -34,14 +20,12 @@ describe('deleteEmployees', () => {
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(mockEmployeeIds),
         });
-        expect(result).toBe(false);
+        expect(result.data).toEqual({ success: true });
+        expect(result.error).toBeFalsy();
     });
 
-    it('returns false when the API call fails', async () => {
-        fetchMock.mockResponseOnce(
-            JSON.stringify("Internal Server Error"),
-            {status: 500}
-        );
+    it('returns a 500 response object when the API call throws an error', async () => {
+        fetchMock.mockRejectOnce(new Error('Network Error'));
 
         const result = await deleteEmployees(mockEmployeeIds);
 
@@ -50,19 +34,36 @@ describe('deleteEmployees', () => {
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(mockEmployeeIds),
         });
-        expect(result).toBe(false);
+        expect(result.error).toBeTruthy();
+        expect(result.status).toBe(500);
     });
 
-    it('encodes the employeeIds in the request body', async () => {
-        const specialEmployeeIds = ['123/45', '678/90'];
-        fetchMock.mockResponseOnce('', {status: 200});
+    it('handles empty employeeIds gracefully', async () => {
+        const emptyEmployeeIds: string[] = [];
+        fetchMock.mockResponseOnce('', {status: 400});
 
-        await deleteEmployees(specialEmployeeIds);
+        const result = await deleteEmployees(emptyEmployeeIds);
+
+        expect(fetchMock).toHaveBeenCalledWith(mockUrl, {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(emptyEmployeeIds),
+        });
+        expect(result.error).toBeTruthy();
+        expect(result.status).toBe(400);
+    });
+
+    it('handles special characters in employeeIds correctly', async () => {
+        const specialEmployeeIds = ['abc@123', 'def#456'];
+        fetchMock.mockResponseOnce('{}', {status: 200});
+
+        const result = await deleteEmployees(specialEmployeeIds);
 
         expect(fetchMock).toHaveBeenCalledWith(mockUrl, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(specialEmployeeIds),
         });
+        expect(result.error).toBeFalsy();
     });
 });

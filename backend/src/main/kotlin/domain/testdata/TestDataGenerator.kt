@@ -3,6 +3,7 @@ package com.kaestner.domain.testdata
 import com.kaestner.domain.employee.Employee
 import com.kaestner.domain.employee.EmployeeRepository
 import kotlinx.datetime.LocalDate
+import kotlinx.datetime.LocalDateTime
 import org.springframework.stereotype.Service
 
 @Service
@@ -20,7 +21,9 @@ class TestDataGenerator(
                 "Kirk",
                 LocalDate.parse("1931-03-22"),
                 "12310199A904",
-                "18530459176"
+                "18530459176",
+                1L,
+                LocalDateTime.parse("1931-03-22T10:00:00")
             ),
             Employee(
                 null,
@@ -28,7 +31,9 @@ class TestDataGenerator(
                 "-",
                 LocalDate.parse("1931-03-26"),
                 "12310199A904",
-                "18530459176"
+                "18530459176",
+                1L,
+                LocalDateTime.parse("1931-03-22T10:00:00")
             ),
             Employee(
                 null,
@@ -36,7 +41,9 @@ class TestDataGenerator(
                 "McCoy",
                 LocalDate.parse("1922-03-20"),
                 "12310199A904",
-                "18530459176"
+                "18530459176",
+                1L,
+                LocalDateTime.parse("1931-03-22T10:00:00")
             ),
             Employee(
                 null,
@@ -44,7 +51,9 @@ class TestDataGenerator(
                 "Scott",
                 LocalDate.parse("1927-03-03"),
                 "12310199A904",
-                "18530459176"
+                "18530459176",
+                1L,
+                LocalDateTime.parse("1931-03-22T10:00:00")
             ),
             Employee(
                 null,
@@ -52,7 +61,9 @@ class TestDataGenerator(
                 "Uhura",
                 LocalDate.parse("1932-12-28"),
                 "12310199A904",
-                "18530459176"
+                "18530459176",
+                1L,
+                LocalDateTime.parse("1931-03-22T10:00:00")
             ),
             Employee(
                 null,
@@ -60,7 +71,9 @@ class TestDataGenerator(
                 "Sulu",
                 LocalDate.parse("1937-03-22"),
                 "12310199A904",
-                "18530459176"
+                "18530459176",
+                1L,
+                LocalDateTime.parse("1931-03-22T10:00:00")
             ),
             Employee(
                 null,
@@ -68,7 +81,9 @@ class TestDataGenerator(
                 "Chekov",
                 LocalDate.parse("1931-04-14"),
                 "12310199A904",
-                "18530459176"
+                "18530459176",
+                1L,
+                LocalDateTime.parse("1931-03-22T10:00:00")
             ),
             Employee(
                 null,
@@ -76,7 +91,9 @@ class TestDataGenerator(
                 "Picard",
                 LocalDate.parse("1940-07-13"),
                 "12310199A904",
-                "18530459176"
+                "18530459176",
+                1L,
+                LocalDateTime.parse("1931-03-22T10:00:00")
             ),
             Employee(
                 null,
@@ -84,7 +101,9 @@ class TestDataGenerator(
                 "Riker",
                 LocalDate.parse("1952-06-19"),
                 "12310199A904",
-                "18530459176"
+                "18530459176",
+                1L,
+                LocalDateTime.parse("1931-03-22T10:00:00")
             ),
             Employee(
                 null,
@@ -92,7 +111,9 @@ class TestDataGenerator(
                 "-",
                 LocalDate.parse("1948-02-18"),
                 "12310199A904",
-                "18530459176"
+                "18530459176",
+                1L,
+                LocalDateTime.parse("1931-03-22T10:00:00")
             ),
             Employee(
                 null,
@@ -100,7 +121,9 @@ class TestDataGenerator(
                 "Crusher",
                 LocalDate.parse("1948-08-13"),
                 "12310199A904",
-                "18530459176"
+                "18530459176",
+                1L,
+                LocalDateTime.parse("1931-03-22T10:00:00")
             ),
             Employee(
                 null,
@@ -108,7 +131,9 @@ class TestDataGenerator(
                 "La Forge",
                 LocalDate.parse("1957-02-16"),
                 "12310199A904",
-                "18530459176"
+                "18530459176",
+                1L,
+                LocalDateTime.parse("1931-03-22T10:00:00")
             ),
             Employee(
                 null,
@@ -116,7 +141,9 @@ class TestDataGenerator(
                 "Troi",
                 LocalDate.parse("1955-03-29"),
                 "12310199A904",
-                "18530459176"
+                "18530459176",
+                1L,
+                LocalDateTime.parse("1931-03-22T10:00:00")
             ),
             Employee(
                 null,
@@ -124,7 +151,9 @@ class TestDataGenerator(
                 "-",
                 LocalDate.parse("1958-10-02"),
                 "12310199A904",
-                "18530459176"
+                "18530459176",
+                1L,
+                LocalDateTime.parse("1931-03-22T10:00:00")
             ),
             Employee(
                 null,
@@ -132,7 +161,9 @@ class TestDataGenerator(
                 "Sisko",
                 LocalDate.parse("1952-07-25"),
                 "12310199A904",
-                "18530459176"
+                "18530459176",
+                1L,
+                LocalDateTime.parse("1931-03-22T10:00:00")
             ),
             Employee(
                 null,
@@ -140,7 +171,9 @@ class TestDataGenerator(
                 "Nerys",
                 LocalDate.parse("1966-03-14"),
                 "12310199A904",
-                "18530459176"
+                "18530459176",
+                1L,
+                LocalDateTime.parse("1931-03-22T10:00:00")
             ),
             Employee(
                 null,
@@ -148,7 +181,9 @@ class TestDataGenerator(
                 "-",
                 LocalDate.parse("1952-05-27"),
                 "12310199A904",
-                "18530459176"
+                "18530459176",
+                1L,
+                LocalDateTime.parse("1931-03-22T10:00:00")
             ),
             Employee(
                 null,
@@ -156,7 +191,9 @@ class TestDataGenerator(
                 "Dax",
                 LocalDate.parse("1965-04-22"),
                 "12310199A904",
-                "18530459176"
+                "18530459176",
+                1L,
+                LocalDateTime.parse("1931-03-22T10:00:00")
             ),
             Employee(
                 null,
@@ -164,7 +201,9 @@ class TestDataGenerator(
                 "O'Brien",
                 LocalDate.parse("1952-10-20"),
                 "12310199A904",
-                "18530459176"
+                "18530459176",
+                1L,
+                LocalDateTime.parse("1931-03-22T10:00:00")
             ),
             Employee(
                 null,
@@ -172,7 +211,9 @@ class TestDataGenerator(
                 "-",
                 LocalDate.parse("1959-04-16"),
                 "12310199A904",
-                "18530459176"
+                "18530459176",
+                1L,
+                LocalDateTime.parse("1931-03-22T10:00:00")
             )
         )
         employeeRepository.saveAll(employees)

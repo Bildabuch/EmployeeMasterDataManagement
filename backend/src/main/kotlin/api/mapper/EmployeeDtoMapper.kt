@@ -50,7 +50,8 @@ class EmployeeDtoMapper {
             birthDate = birthDate,
             pensionInsuranceNumber = employeeDto.pensionInsuranceNumber.trim(),
             taxIdentificationNumber = employeeDto.taxIdentificationNumber.trim(),
-            version = employeeDto.version?.toLongOrNull()
+            version = employeeDto.version?.toLongOrNull(),
+            updatedAt =null
         )
     }
 }

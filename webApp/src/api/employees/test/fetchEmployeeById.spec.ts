@@ -29,7 +29,7 @@ describe('fetchEmployeeById', () => {
         const result = await fetchEmployeeById(mockEmployeeId);
 
         expect(fetchMock).toHaveBeenCalledWith(mockUrl);
-        expect(createResponseObject).toHaveBeenCalledWith(expect.any(Response));
+        expect(createResponseObject).toHaveBeenCalledWith(expect.any(Response), expect.any(Function));
         expect(result).toEqual({ success: true, data: mockEmployeeDto });
     });
 

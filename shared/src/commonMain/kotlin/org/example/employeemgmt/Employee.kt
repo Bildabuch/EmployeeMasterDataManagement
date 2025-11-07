@@ -9,7 +9,7 @@ class Employee(
     override val birthDate: LocalDate,
     override val pensionInsuranceNumber: String,
     override val taxIdentificationNumber: String,
-    override var updatedAt: LocalDateTime
+    override var updatedAt: LocalDateTime?
 ) : IEmployee
 
 interface IEmployee {
@@ -18,5 +18,5 @@ interface IEmployee {
     val birthDate: LocalDate
     val pensionInsuranceNumber: String
     val taxIdentificationNumber: String
-    var updatedAt: LocalDateTime
+    var updatedAt: LocalDateTime?
 }

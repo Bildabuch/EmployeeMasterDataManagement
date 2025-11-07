@@ -8,11 +8,11 @@ import {Dayjs} from "dayjs";
  * @property {string} employeeId - The unique identifier of the associated employee.
  * @property {string} givenName - The first name of the employee.
  * @property {string} surname - The last name of the employee.
- * @property {Dayjs} birthDate - The birth date of the employee as a Dayjs object.
+ * @property {Dayjs} birthDate - The birthdate of the employee as a Dayjs object.
  * @property {string} pensionInsuranceNumber - The employee's pension insurance number.
  * @property {string} taxIdentificationNumber - The employee's tax identification number.
  * @property {string} version - The version of the history entry.
- * @property {Dayjs} createdAt - The timestamp when the history entry was created.
+ * @property {Dayjs} updatedAt - The timestamp when the history entry was created.
  */
 export interface EmployeeHistoryEntry {
     id: string;
@@ -23,5 +23,5 @@ export interface EmployeeHistoryEntry {
     pensionInsuranceNumber: string;
     taxIdentificationNumber: string;
     version: string;
-    createdAt: Dayjs;
+    updatedAt: Dayjs;
 }

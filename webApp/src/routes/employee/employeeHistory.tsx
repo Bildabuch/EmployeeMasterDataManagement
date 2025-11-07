@@ -16,8 +16,14 @@ export const employeeHistoryRoute: RouteObject = {
     children: [
         {
             index: true,
-            loader: async ({params}) =>
-                fetchHistoryForEmployee(params.employeeId!),
+            loader: async ({params}) => {
+                const response = await fetchHistoryForEmployee(params.employeeId!);
+                if (response.error) {
+                    console.error(`Error fetching history for employee ${params.employeeId}: Status ${response.status}`);
+                    return undefined;
+                }
+                return response.data;
+            },
             element: <EmployeeHistoryListPage/>,
         },
         employeeHistoryDetail

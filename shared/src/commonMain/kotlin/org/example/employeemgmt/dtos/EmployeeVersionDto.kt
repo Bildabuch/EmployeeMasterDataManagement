@@ -8,7 +8,7 @@ import kotlin.js.JsExport
 @Serializable
 @JsExport
 data class EmployeeVersionDto(
-    val id: String?,
+    val id: String,
     val employeeId: String,
     val givenName: String,
     val surname: String,

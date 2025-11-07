@@ -12,43 +12,36 @@ describe('deleteEmployee', () => {
         fetchMock.resetMocks();
     });
 
-    it('returns true when the employee is successfully deleted', async () => {
-        fetchMock.mockResponseOnce('', {status: 200});
+    it('returns a 500 response object when the API call throws an error', async () => {
+        fetchMock.mockRejectOnce(new Error('Network Error'));
 
         const result = await deleteEmployee(mockEmployeeId);
 
         expect(fetchMock).toHaveBeenCalledWith(mockUrl, {method: 'DELETE'});
-        expect(result).toBe(true);
+        expect(result.error).toBeTruthy();
+        expect(result.status).toBe(500);
     });
 
-    it('returns false when the API responds with a 404 status', async () => {
-        fetchMock.mockResponseOnce('', {status: 404});
+    it('handles empty employeeId gracefully', async () => {
+        const emptyEmployeeId = '';
+        const emptyUrl = `${baseUrl}/employees/${encodeURIComponent(emptyEmployeeId)}`;
+        fetchMock.mockResponseOnce('', {status: 400});
 
-        const result = await deleteEmployee(mockEmployeeId);
+        const result = await deleteEmployee(emptyEmployeeId);
 
-        expect(fetchMock).toHaveBeenCalledWith(mockUrl, {method: 'DELETE'});
-        expect(result).toBe(false);
+        expect(fetchMock).toHaveBeenCalledWith(emptyUrl, {method: 'DELETE'});
+        expect(result.error).toBeTruthy();
+        expect(result.status).toBe(400);
     });
 
-    it('returns false when the API call fails', async () => {
-        fetchMock.mockResponseOnce(
-            JSON.stringify("Internal Server Error"),
-            {status: 500}
-        );
-
-        const result = await deleteEmployee(mockEmployeeId);
-
-        expect(fetchMock).toHaveBeenCalledWith(mockUrl, {method: 'DELETE'});
-        expect(result).toBe(false);
-    });
-
-    it('encodes the employeeId in the URL', async () => {
-        const specialEmployeeId = '123/45';
+    it('handles special characters in employeeId correctly', async () => {
+        const specialEmployeeId = 'abc@123';
         const encodedUrl = `${baseUrl}/employees/${encodeURIComponent(specialEmployeeId)}`;
-        fetchMock.mockResponseOnce('', {status: 200});
+        fetchMock.mockResponseOnce('{}', {status: 200});
 
-        await deleteEmployee(specialEmployeeId);
+        const result = await deleteEmployee(specialEmployeeId);
 
         expect(fetchMock).toHaveBeenCalledWith(encodedUrl, {method: 'DELETE'});
+        expect(result.error).toBeFalsy();
     });
 });

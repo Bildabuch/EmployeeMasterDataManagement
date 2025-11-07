@@ -2,7 +2,7 @@ import {useEmployee} from "../../components/EmployeeContextProvider";
 import {PageHeader} from "../../components";
 import {EmployeeFormular} from "../../components/EmployeeFormular/EmployeeFormular.tsx";
 import {appRoutePaths} from "../../routes/appRoutePaths.ts";
-import {Stack, Button} from "@mui/material";
+import {Button, Stack, Typography} from "@mui/material";
 import {useLocation, useNavigate} from "react-router-dom";
 import {updateEmployee} from "../../api/employees";
 import type {EditFromOrigin} from "../../components/EmployeeEditAction/EditFromOrigin";
@@ -78,10 +78,15 @@ export const EmployeeEditPage = (): ReactElement => {
 
     return <Stack justifyContent="space-between"
                   spacing={2}>
-        <PageHeader heading="Mitarbeiter bearbeiten"/>
-        <EmployeeFormular initialData={employee}
-                          errorMessages={errorMessages}
-                          disableSubmitButton={updateNotPossible}
-                          onSubmit={handleUpdate}/>
+        {employee && <><PageHeader heading="Mitarbeiter bearbeiten"/>
+            <EmployeeFormular initialData={employee}
+                              errorMessages={errorMessages}
+                              disableSubmitButton={updateNotPossible}
+                              onSubmit={handleUpdate}/>
+        </>}
+        {!employee && <Typography variant="h6"
+                                  color="error">
+            Der angeforderte Mitarbeiter wurde nicht gefunden.
+        </Typography>}
     </Stack>
 };

@@ -42,7 +42,7 @@ export const columns: GridColDef<EmployeeHistoryEntry>[] = [
         width: 200,
     },
     {
-        field: 'createdAt',
+        field: 'updatedAt',
         headerName: 'Geändert am',
         width: 180,
         valueFormatter: (value) => {

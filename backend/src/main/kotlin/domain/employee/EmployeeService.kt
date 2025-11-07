@@ -29,18 +29,19 @@ class EmployeeService(
     fun update(employee: Employee): EmployeeUpdateResult {
         if (employee.id == null) throw IllegalArgumentException("Employee id must be set for update")
 
-        employeeRepository.findById(employee.id).orElseThrow {
+        val originalEmployee = employeeRepository.findById(employee.id).orElseThrow {
             NoSuchElementException("Employee with id=${employee.id} not found")
         }
+        employee.updatedAt = originalEmployee.updatedAt
 
         val errorMessages = EmployeeValidatorService.validate(employee)
         if (errorMessages.isNotEmpty()) {
             return EmployeeUpdateResult(employee = null, errorMessages = errorMessages)
         }
 
-        return try {
-            EmployeeUpdateResult(employee = employeeRepository.save(employee), errorMessages = null)
-        } catch (ex: OptimisticLockingFailureException) {
+        try {
+            return EmployeeUpdateResult(employee = employeeRepository.save(employee), errorMessages = null)
+        } catch (_: OptimisticLockingFailureException) {
             throw StaleEmployeeException("Employee with id=${employee.id} could not be updated due to concurrent modification")
         }
     }

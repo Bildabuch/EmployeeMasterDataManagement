@@ -9,14 +9,15 @@ describe('fetchHistoryForEmployeeByVersion', () => {
     const mockEmployeeId = '12345';
     const mockVersion = 'v1';
     const mockUrl = `${baseUrl}/employee-versions/${mockEmployeeId}/${mockVersion}`;
+    jest.useFakeTimers().setSystemTime(new Date('2025-11-07T14:43:50.000Z'))
     const mockHistory: EmployeeHistoryEntry = {
         id: '1',
         surname: 'Doe',
         givenName: 'Jane',
         version: 'v1',
-        createdAt: dayjs(),
+        updatedAt: dayjs(),
         employeeId: '12345',
-        birthDate: dayjs('1990-01-01'),
+        birthDate: dayjs('2025-11-07T14:43:50.000Z'),
         pensionInsuranceNumber: 'PIN123456',
         taxIdentificationNumber: 'TID123456',
     };
@@ -34,13 +35,14 @@ describe('fetchHistoryForEmployeeByVersion', () => {
     });
 
     it('fetches employee history successfully and returns a ResponseObject', async () => {
-        fetchMock.mockResponseOnce(JSON.stringify(mockHistory), {status: 200});
+        const response = JSON.stringify(mockHistory);
+        fetchMock.mockResponseOnce(response, {status: 200});
 
         const result = await fetchHistoryForEmployeeByVersion(mockEmployeeId, mockVersion);
 
         expect(fetchMock).toHaveBeenCalledWith(mockUrl);
         expect(result.error).toBe(false);
-        expect(result.data).toEqual(JSON.parse(JSON.stringify(mockHistory)));
+        expect(result.data).toEqual(mockHistory);
     });
 
     it('returns an error ResponseObject when the API returns a 404 status', async () => {

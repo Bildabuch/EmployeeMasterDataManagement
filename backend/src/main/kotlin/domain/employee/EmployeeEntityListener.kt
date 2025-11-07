@@ -33,13 +33,14 @@ class EmployeeEntityListener {
         val employeeVersionRepository = BeanUtil.getBean(EmployeeVersionRepository::class.java)
 
         val employeeVersion = EmployeeVersion(
-            employeeId = employee.id?: throw IllegalArgumentException("Employee ID cannot be null"),
+            employeeId = employee.id ?: throw IllegalArgumentException("Employee ID cannot be null"),
             givenName = employee.givenName,
             surname = employee.surname,
             birthDate = employee.birthDate,
             pensionInsuranceNumber = employee.pensionInsuranceNumber,
             taxIdentificationNumber = employee.taxIdentificationNumber,
-            version = employee.version?: throw IllegalArgumentException("Employee version cannot be null")
+            version = employee.version ?: throw IllegalArgumentException("Employee version cannot be null"),
+            createdAt = employee.updatedAt ?: throw IllegalArgumentException("Employee updatedAt cannot be null")
         )
         employeeVersionRepository.save(employeeVersion)
     }

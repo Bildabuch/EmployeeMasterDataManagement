@@ -1,7 +1,7 @@
 import {useEmployee} from "../../components/EmployeeContextProvider";
 import {PageHeader} from "../../components";
 import {EmployeeHistoryGrid} from "./EmployeeHistoryGrid/EmployeeHistoryGrid.tsx";
-import {Stack} from "@mui/material";
+import {Stack, Typography} from "@mui/material";
 import {determineEmployeeName} from "../../utilities";
 import {useLoaderData, useNavigate} from "react-router-dom";
 import {EmployeeHistoryEntry} from "../../models";
@@ -16,7 +16,7 @@ import {ReactElement} from "react";
  *
  * @returns {ReactElement} The rendered EmployeeHistoryListPage component.
  */
-export const EmployeeHistoryListPage = ():ReactElement => {
+export const EmployeeHistoryListPage = (): ReactElement => {
     const employee = useEmployee();
     const employeeHistoryEntries = useLoaderData<EmployeeHistoryEntry[]>();
     const employeeName = determineEmployeeName(employee);
@@ -25,10 +25,16 @@ export const EmployeeHistoryListPage = ():ReactElement => {
     return <Stack justifyContent="space-between"
                   flex={1}
                   spacing={2}>
-        <PageHeader heading={`${employeeName} (History)`}/>
-        <EmployeeHistoryGrid employeeHistoryEntries={employeeHistoryEntries}
-                             onRowClick={employeeHistoryEntry => {
-                                 navigate(appRoutePaths.employeeHistory.detail(employeeHistoryEntry.employeeId, employeeHistoryEntry.version))
-                             }}/>
+        {employee && <><PageHeader heading={`${employeeName} (History)`}/>
+            <EmployeeHistoryGrid employeeHistoryEntries={employeeHistoryEntries}
+                                 onRowClick={employeeHistoryEntry => {
+                                     navigate(appRoutePaths.employeeHistory.detail(employeeHistoryEntry.employeeId, employeeHistoryEntry.version))
+                                 }}/>
+        </>}
+        {!employee && <Typography variant="h6"
+                                  color="error">
+            Der angeforderte Mitarbeiter wurde nicht gefunden.
+        </Typography>}
+
     </Stack>
 };

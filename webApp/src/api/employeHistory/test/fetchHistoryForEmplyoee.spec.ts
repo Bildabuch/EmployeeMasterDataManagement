@@ -9,12 +9,13 @@ fetchMock.enableMocks();
 describe('fetchHistoryForEmployee', () => {
     const mockEmployeeId = '12345';
     const mockUrl = `${baseUrl}/employee-versions/${mockEmployeeId}`;
+    jest.useFakeTimers().setSystemTime(new Date('2025-11-07T14:43:50.000Z'));
     const mockHistory: EmployeeHistoryEntry[] = [{
         id: '1',
         surname: 'Doe',
         givenName: 'Jane',
         version: 'v1',
-        createdAt: dayjs(),
+        updatedAt: dayjs("2025-11-07T14:43:50.000Z"),
         employeeId: '12345',
         birthDate: dayjs('1990-01-01'),
         pensionInsuranceNumber: 'PIN123456',
@@ -40,7 +41,7 @@ describe('fetchHistoryForEmployee', () => {
         const result = await fetchHistoryForEmployee(mockEmployeeId);
 
         expect(fetch).toHaveBeenCalledWith(mockUrl);
-        expect(result).toEqual(JSON.parse(JSON.stringify(mockHistory)));
+        expect(result.data).toEqual([...mockHistory]);
     });
 
     it('returns an empty array when the API call fails with a non-200 status', async () => {
@@ -52,24 +53,9 @@ describe('fetchHistoryForEmployee', () => {
         const result = await fetchHistoryForEmployee(mockEmployeeId);
 
         expect(fetch).toHaveBeenCalledWith(mockUrl);
-        expect(result).toEqual([]);
-    });
-
-    it('logs an error message when the API call fails with a non-200 status', async () => {
-        const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation();
-        (fetch as jest.Mock).mockResolvedValue({
-            status: 500,
-            statusText: 'Internal Server Error',
-        });
-
-        await fetchHistoryForEmployee(mockEmployeeId);
-
-        expect(consoleErrorSpy).toHaveBeenCalledWith(
-            'Error fetching employee history:',
-            'Internal Server Error'
-        );
-
-        consoleErrorSpy.mockRestore();
+        expect(result.data).toEqual(null);
+        expect(result.status).toBe(404);
+        expect(result.error).toBeTruthy();
     });
 
     it('returns an empty array when the fetch call throws an error', async () => {
@@ -81,6 +67,8 @@ describe('fetchHistoryForEmployee', () => {
         const result = await fetchHistoryForEmployee(mockEmployeeId);
 
         expect(fetchMock).toHaveBeenCalledWith(mockUrl);
-        expect(result).toEqual([]);
+        expect(result.data).toEqual(null);
+        expect(result.status).toBe(500);
+        expect(result.error).toBeTruthy();
     });
 });

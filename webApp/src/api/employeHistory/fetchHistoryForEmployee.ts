@@ -1,5 +1,10 @@
 import {baseUrl} from "../baseUrl.ts";
 import {type EmployeeHistoryEntry} from "../../models";
+import {ResponseObject} from "../ResponseObject.ts";
+import {create500ResponseObject} from "../create500ResponseObject.ts";
+import {createResponseObject} from "../createResponseObject.ts";
+import {EmployeeVersionDto} from "shared";
+import {mapEmployeeHistoryDto} from "./mapEmployeeHistoryDto.ts";
 
 /**
  * Fetches the history of an employee based on their ID.
@@ -14,12 +19,13 @@ import {type EmployeeHistoryEntry} from "../../models";
  * - On success: Contains the employee history data.
  * - On failure: Returns an empty array.
  */
-export const fetchHistoryForEmployee = async (employeeId: string): Promise<EmployeeHistoryEntry[]> => {
-    const result = await fetch(`${baseUrl}/employee-versions/${encodeURIComponent(employeeId)}`);
-    if (result.ok) {
-        return result.json();
-    } else {
-        console.error("Error fetching employee history:", result.statusText);
-        return [];
+export const fetchHistoryForEmployee = async (employeeId: string): Promise<ResponseObject<EmployeeHistoryEntry[]>> => {
+    try {
+        const response = await fetch(`${baseUrl}/employee-versions/${encodeURIComponent(employeeId)}`);
+
+        return createResponseObject(response, (data: EmployeeVersionDto[]) => data.map(mapEmployeeHistoryDto));
+    } catch (error) {
+        console.error("Error fetching employees:", error);
+        return create500ResponseObject()
     }
 }

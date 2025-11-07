@@ -16,11 +16,14 @@ import {ReactElement} from "react";
 export const EmployeeHistoryDetailPage = (): ReactElement => {
     const employeeHistoryEntry = useLoaderData<EmployeeHistoryEntry>();
     const employeeName = determineEmployeeName(employeeHistoryEntry);
-
     return <Stack justifyContent="space-between"
                   spacing={2}>
         {employeeHistoryEntry && <>
             <PageHeader heading={employeeName}/>
+            <Typography variant="caption">
+                {employeeHistoryEntry.updatedAt.format("DD.MM.YYYY HH:mm:ss")} Uhr -
+                Version {employeeHistoryEntry.version}
+            </Typography>
             <EmployeeDetails employee={employeeHistoryEntry}/>
         </>
         }
