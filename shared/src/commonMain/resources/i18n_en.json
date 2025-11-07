@@ -1,0 +1,15 @@
+{
+  "EMPLOYEE_GIVEN_NAME_BLANK": "The employee's first name must not be left blank.",
+  "EMPLOYEE_SURNAME_BLANK": "The employee's surname must not be left blank.",
+  "PENSION_INSURANCE_NUMBER_BLANK": "The social security number cannot be empty.",
+  "PENSION_INSURANCE_NUMBER_INVALID_UNKNOWN_ERROR": "Unknown error.",
+  "PENSION_INSURANCE_NUMBER_CONTROL_DIGIT_INVALID": "The check digit is invalid.",
+  "PENSION_INSURANCE_NUMBER_BIRTHDATE_INVALID": "The date of birth is invalid.",
+  "PENSION_INSURANCE_NUMBER_FORMAT_INVALID": "The format of the social security number is invalid.",
+  "TAX_IDENTIFICATION_NUMBER_INVALID": "The tax identification number is invalid.",
+  "EMPLOYEE_TIN_BLANK": "The tax identification number cannot be blank.",
+  "EMPLOYEE_BIRTHDATE_BLANK": "The date of birth cannot be blank.",
+  "EMPLOYEE_BIRTH_DATE_IN_FUTURE": "The date of birth must not be in the future.",
+  "EMPLOYEE_BIRTH_DATE_UNDERAGE": "The employee does not meet the minimum age requirement of 18 years.",
+  "EMPLOYEE_BIRTH_DATE_INVALID_UNKNOWN_ERROR": "Unknown error with date of birth."
+}

@@ -1,0 +1,6 @@
+export * from "./EmployeeCreationPage/EmployeeCreationPage"
+export * from "./EmployeeListPage/EmployeeListPage"
+export * from "./EmployeeDetailPage/EmployeeDetailPage"
+export * from "./EmployeeEditPage/EmployeeEditPage"
+export * from "./EmployeeHistoryListPage/EmployeeHistoryListPage"
+export * from "./EmployeeHistoryDetailPage/EmployeeHistoryDetailPage"

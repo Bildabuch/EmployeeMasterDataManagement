@@ -1,0 +1,6 @@
+export * from "./fetchAllEmployees"
+export * from "./fetchEmployeeById"
+export * from "./postEmployee"
+export * from "./deleteEmployee"
+export * from "./deleteEmployees"
+export * from "./updateEmployee"

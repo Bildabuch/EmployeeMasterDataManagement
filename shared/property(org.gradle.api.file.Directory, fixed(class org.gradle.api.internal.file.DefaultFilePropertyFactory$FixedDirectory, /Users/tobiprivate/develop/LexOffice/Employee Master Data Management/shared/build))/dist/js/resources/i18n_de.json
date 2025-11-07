@@ -1,0 +1,15 @@
+{
+  "EMPLOYEE_GIVEN_NAME_BLANK": "Der Vorname des Mitarbeiters darf nicht leer sein.",
+  "EMPLOYEE_SURNAME_BLANK": "Der Nachname des Mitarbeiters darf nicht leer sein.",
+  "PENSION_INSURANCE_NUMBER_BLANK": "Die Sozialversicherungsnummer darf nicht leer sein.",
+  "PENSION_INSURANCE_NUMBER_INVALID_UNKNOWN_ERROR": "Unbekannter Fehler.",
+  "PENSION_INSURANCE_NUMBER_CONTROL_DIGIT_INVALID": "Die Prüfziffer ist ungültig.",
+  "PENSION_INSURANCE_NUMBER_BIRTHDATE_INVALID": "Das Geburtsdatum ist ungültig.",
+  "PENSION_INSURANCE_NUMBER_FORMAT_INVALID": "Das Format der Sozialversicherungsnummer ist ungültig.",
+  "TAX_IDENTIFICATION_NUMBER_INVALID": "Die Steueridentifikationsnummer ist ungültig.",
+  "EMPLOYEE_TIN_BLANK": "Die Steueridentifikationsnummer darf nicht leer sein.",
+  "EMPLOYEE_BIRTHDATE_BLANK": "Das Geburtsdatum darf nicht leer sein.",
+  "EMPLOYEE_BIRTH_DATE_IN_FUTURE": "Das Geburtsdatum darf nicht in der Zukunft liegen.",
+  "EMPLOYEE_BIRTH_DATE_UNDERAGE": "Der Mitarbeiter erfüllt nicht das Mindestalter von 18 Jahren.",
+  "EMPLOYEE_BIRTH_DATE_INVALID_UNKNOWN_ERROR": "Unbekannter Fehler beim Geburtsdatum."
+}
